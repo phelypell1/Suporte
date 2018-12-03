@@ -15,9 +15,6 @@ import ClassDao.NovaOSDao;
 import ClassDao.PropriedadeDao;
 import ClassDao.StatusDao;
 import ClassDao.UsuariosDao;
-import java.sql.Timestamp;
-import java.text.SimpleDateFormat;
-import java.util.Date;
 /**
  *
  * @author devops
@@ -28,7 +25,7 @@ public class ViewNovaOS extends javax.swing.JFrame {
      * Creates new form ViewNovaOS
      */
     public ViewNovaOS() {
-       getContentPane().setBackground(java.awt.Color.decode("#FAEBD7"));
+       //getContentPane().setBackground(java.awt.Color.decode("#FAEBD7"));
         initComponents();
         StatusDao sts = new StatusDao();
         PropriedadeDao urg = new PropriedadeDao();
@@ -80,6 +77,7 @@ public class ViewNovaOS extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Nova Ordem de Serviço");
+        setResizable(false);
 
         jLabel1.setText("N° OS:");
 
@@ -172,7 +170,7 @@ public class ViewNovaOS extends javax.swing.JFrame {
                         .addComponent(btnEnviar)
                         .addGap(18, 18, 18)
                         .addComponent(btnCancelar)))
-                .addGap(21, 21, 21))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -205,10 +203,10 @@ public class ViewNovaOS extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnEnviar)
                     .addComponent(btnCancelar))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(930, 424));
+        setSize(new java.awt.Dimension(942, 400));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

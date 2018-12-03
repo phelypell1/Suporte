@@ -49,6 +49,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenuItem2 = new javax.swing.JMenuItem();
         jMenuItem3 = new javax.swing.JMenuItem();
 
+        setTitle("Tela Principal");
+
         jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/relatorio (3).png"))); // NOI18N
         jMenu1.setText("Centro de Serviços");
 
@@ -61,6 +63,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         jMenu1.add(jMenuItem4);
 
         jMenuItem5.setText("OS Abertas");
+        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jMenuItem5ActionPerformed(evt);
+            }
+        });
         jMenu1.add(jMenuItem5);
 
         jMenuItem6.setText("OS Fechadas");
@@ -98,6 +105,8 @@ public class ViewPrincipal extends javax.swing.JFrame {
             .addGap(0, 354, Short.MAX_VALUE)
         );
 
+        getAccessibleContext().setAccessibleDescription("");
+
         setSize(new java.awt.Dimension(708, 405));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
@@ -106,6 +115,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
         ViewNovaOS novaos = new ViewNovaOS();
         novaos.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
+
+    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+        ViewOSAberta aberta = new ViewOSAberta();
+        aberta.setVisible(true);
+    }//GEN-LAST:event_jMenuItem5ActionPerformed
 
     /**
      * @param args the command line arguments

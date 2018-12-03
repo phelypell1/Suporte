@@ -132,4 +132,5 @@ public class SolicitacaoOSBeans {
     public void setSts_id(StatusBeans sts_id) {
         this.sts_id = sts_id;
     }
+
 }
