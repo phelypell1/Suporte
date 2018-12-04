@@ -39,56 +39,68 @@ public class ViewPrincipal extends javax.swing.JFrame {
     private void initComponents() {
 
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
+        menuNovaOs = new javax.swing.JMenu();
         jMenuItem4 = new javax.swing.JMenuItem();
-        jMenuItem5 = new javax.swing.JMenuItem();
-        jMenuItem6 = new javax.swing.JMenuItem();
-        jMenuItem7 = new javax.swing.JMenuItem();
+        menuOsAberta = new javax.swing.JMenuItem();
+        menuOsFechada = new javax.swing.JMenuItem();
+        menuRelatorio = new javax.swing.JMenuItem();
         jMenu2 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
-        jMenuItem3 = new javax.swing.JMenuItem();
+        menuProduto = new javax.swing.JMenuItem();
+        menuNovosProdutos = new javax.swing.JMenuItem();
+        menuConsulta = new javax.swing.JMenuItem();
 
         setTitle("Tela Principal");
 
-        jMenu1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/relatorio (3).png"))); // NOI18N
-        jMenu1.setText("Centro de Serviços");
+        menuNovaOs.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/relatorio (3).png"))); // NOI18N
+        menuNovaOs.setText("Centro de Serviços");
 
+        jMenuItem4.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F2, 0));
         jMenuItem4.setText("Nova OS");
         jMenuItem4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jMenuItem4ActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem4);
+        menuNovaOs.add(jMenuItem4);
 
-        jMenuItem5.setText("OS Abertas");
-        jMenuItem5.addActionListener(new java.awt.event.ActionListener() {
+        menuOsAberta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F3, 0));
+        menuOsAberta.setText("OS Abertas");
+        menuOsAberta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem5ActionPerformed(evt);
+                menuOsAbertaActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem5);
+        menuNovaOs.add(menuOsAberta);
 
-        jMenuItem6.setText("OS Fechadas");
-        jMenu1.add(jMenuItem6);
+        menuOsFechada.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F4, 0));
+        menuOsFechada.setText("OS Fechadas");
+        menuNovaOs.add(menuOsFechada);
 
-        jMenuItem7.setText("Relatórios");
-        jMenu1.add(jMenuItem7);
+        menuRelatorio.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F5, 0));
+        menuRelatorio.setText("Relatórios");
+        menuNovaOs.add(menuRelatorio);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(menuNovaOs);
 
         jMenu2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/controle-de-estoque.png"))); // NOI18N
         jMenu2.setText("Estoque");
 
-        jMenuItem1.setText("Produtos");
-        jMenu2.add(jMenuItem1);
+        menuProduto.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F6, 0));
+        menuProduto.setText("Produtos");
+        menuProduto.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuProdutoActionPerformed(evt);
+            }
+        });
+        jMenu2.add(menuProduto);
 
-        jMenuItem2.setText("novos produtos");
-        jMenu2.add(jMenuItem2);
+        menuNovosProdutos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
+        menuNovosProdutos.setText("novos produtos");
+        jMenu2.add(menuNovosProdutos);
 
-        jMenuItem3.setText("Consulta");
-        jMenu2.add(jMenuItem3);
+        menuConsulta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, 0));
+        menuConsulta.setText("Consulta");
+        jMenu2.add(menuConsulta);
 
         jMenuBar1.add(jMenu2);
 
@@ -116,10 +128,15 @@ public class ViewPrincipal extends javax.swing.JFrame {
         novaos.setVisible(true);
     }//GEN-LAST:event_jMenuItem4ActionPerformed
 
-    private void jMenuItem5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem5ActionPerformed
+    private void menuOsAbertaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuOsAbertaActionPerformed
         ViewOSAberta aberta = new ViewOSAberta();
         aberta.setVisible(true);
-    }//GEN-LAST:event_jMenuItem5ActionPerformed
+    }//GEN-LAST:event_menuOsAbertaActionPerformed
+
+    private void menuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProdutoActionPerformed
+        viewProdutos produtos = new viewProdutos();
+        produtos.setVisible(true);
+    }//GEN-LAST:event_menuProdutoActionPerformed
 
     /**
      * @param args the command line arguments
@@ -157,15 +174,15 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
     private javax.swing.JMenuItem jMenuItem4;
-    private javax.swing.JMenuItem jMenuItem5;
-    private javax.swing.JMenuItem jMenuItem6;
-    private javax.swing.JMenuItem jMenuItem7;
+    private javax.swing.JMenuItem menuConsulta;
+    private javax.swing.JMenu menuNovaOs;
+    private javax.swing.JMenuItem menuNovosProdutos;
+    private javax.swing.JMenuItem menuOsAberta;
+    private javax.swing.JMenuItem menuOsFechada;
+    private javax.swing.JMenuItem menuProduto;
+    private javax.swing.JMenuItem menuRelatorio;
     // End of variables declaration//GEN-END:variables
 }

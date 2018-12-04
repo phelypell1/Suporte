@@ -31,7 +31,7 @@ public class ViewNovaOS extends javax.swing.JFrame {
         PropriedadeDao urg = new PropriedadeDao();
         UsuariosDao userd = new UsuariosDao();
         DepartamentoDAO depa = new DepartamentoDAO();
-        for (UsuariosBeans user : userd.UsuarioRead()) {
+        for(UsuariosBeans user : userd.TodosUsuarioRead()){
             jComboSolicitante.addItem(user);
         }
         for(DepartamentoBeans dep: depa.DepartamentoRead()){
@@ -75,7 +75,7 @@ public class ViewNovaOS extends javax.swing.JFrame {
         jComboBox1 = new javax.swing.JComboBox<>();
         jFormattedTextField1 = new javax.swing.JFormattedTextField();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Nova Ordem de Serviço");
         setResizable(false);
 
@@ -206,7 +206,7 @@ public class ViewNovaOS extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(942, 400));
+        setSize(new java.awt.Dimension(942, 428));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 

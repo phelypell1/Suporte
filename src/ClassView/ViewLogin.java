@@ -123,29 +123,29 @@ public class ViewLogin extends javax.swing.JFrame {
                     .addGroup(layout.createSequentialGroup()
                         .addGap(12, 12, 12)
                         .addComponent(btnNovoUser, javax.swing.GroupLayout.PREFERRED_SIZE, 101, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(23, Short.MAX_VALUE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(15, 15, 15)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                    .addComponent(cbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jLabel1))
+                    .addComponent(jLabel1)
+                    .addComponent(cbUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(9, 9, 9)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jtSenha)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jtSenha, javax.swing.GroupLayout.PREFERRED_SIZE, 29, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnAcessar)
                     .addComponent(btnCancelar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(btnNovoUser)
-                .addGap(15, 15, 15))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(212, 198));
+        setSize(new java.awt.Dimension(212, 230));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
@@ -161,21 +161,21 @@ public class ViewLogin extends javax.swing.JFrame {
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
         boolean resposta = consultar(cbUsuario.getText(), jtSenha.getText());
         if(resposta == true) {
-            if ("administrador".equals(Acesso)) 
+            if ("Gerencia".equals(Acesso) || "Supervisao".equals(Acesso) || "Rh".equals(Acesso)) 
             {
                 System.setProperty("Usuario: ",cbUsuario.getText());
                 this.setVisible(false);
                 ViewPrincipal princi = new ViewPrincipal();
                 princi.setVisible(true);
             }
-            else if("usuario".equals(Acesso))
+            else if("Leitura".equals(Acesso) || "Corte".equals(Acesso) || "CPD".equals(Acesso))
             {
                 this.setVisible(false);
                 ViewPrincipal princ = new ViewPrincipal();
                 princ.setVisible(true);
             }
         } else {
-            JOptionPane.showMessageDialog(rootPane, "Usuário ou senha incorretos, Ou você não tem permissão de acesso ! \n Entre em contato com o administrador para solicitar acesso!");
+            JOptionPane.showMessageDialog(rootPane, "Usuário ou senha incorretos ! \n Ou entre em contato com área de TI para solicitar acesso!");
         }
 
     }//GEN-LAST:event_btnAcessarActionPerformed

@@ -20,7 +20,7 @@ import javax.swing.JOptionPane;
  */
 public class UsuariosDao {
     
-    public List<UsuariosBeans> UsuarioRead() {
+     public List<UsuariosBeans> TodosUsuarioRead() {
         Connection con = ConnectionFactor.getConnection();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -28,7 +28,7 @@ public class UsuariosDao {
         List<UsuariosBeans> UsuarioRead = new ArrayList<>();
 
         try {
-            pst = con.prepareStatement("select * from Usuario order by nome_user");
+            pst = con.prepareStatement("select * from Usuario where setor like '%r%'");
             rs = pst.executeQuery();
 
             while (rs.next()) {
@@ -39,6 +39,30 @@ public class UsuariosDao {
             }
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Erro ao Carregar dados para o jcombox 'table.Cidades'");
+        }
+        return UsuarioRead;
+    }
+    
+    
+    public List<UsuariosBeans> UsuarioRead() {
+        Connection con = ConnectionFactor.getConnection();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        List<UsuariosBeans> UsuarioRead = new ArrayList<>();
+
+        try {
+            pst = con.prepareStatement("select * from Usuario where setor like '%r%'");
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                UsuariosBeans user = new UsuariosBeans();
+                user.setId_user(rs.getInt("id_user"));
+                user.setNome_user(rs.getString("nome_user"));
+                UsuarioRead.add(user);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Carregar dados para o jcombox");
         }
         return UsuarioRead;
     }
