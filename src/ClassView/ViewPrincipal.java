@@ -96,6 +96,11 @@ public class ViewPrincipal extends javax.swing.JFrame {
 
         menuNovosProdutos.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F7, 0));
         menuNovosProdutos.setText("novos produtos");
+        menuNovosProdutos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                menuNovosProdutosActionPerformed(evt);
+            }
+        });
         jMenu2.add(menuNovosProdutos);
 
         menuConsulta.setAccelerator(javax.swing.KeyStroke.getKeyStroke(java.awt.event.KeyEvent.VK_F8, 0));
@@ -134,9 +139,15 @@ public class ViewPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_menuOsAbertaActionPerformed
 
     private void menuProdutoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuProdutoActionPerformed
-        viewProdutos produtos = new viewProdutos();
-        produtos.setVisible(true);
+       viewEstoque estoque = new viewEstoque();
+       estoque.setVisible(true);
+               
     }//GEN-LAST:event_menuProdutoActionPerformed
+
+    private void menuNovosProdutosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_menuNovosProdutosActionPerformed
+        viewProdutos prod = new viewProdutos();
+        prod.setVisible(true);
+    }//GEN-LAST:event_menuNovosProdutosActionPerformed
 
     /**
      * @param args the command line arguments

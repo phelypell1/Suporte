@@ -16,6 +16,8 @@ public class MaterialBeans {
     private String data_entrada;
     private int quantidade;
     private UsuariosBeans user_id;
+    private String Obser;
+    private double valor_unit;
 
     /**
      * @return the id_material
@@ -85,6 +87,34 @@ public class MaterialBeans {
      */
     public void setUser_id(UsuariosBeans user_id) {
         this.user_id = user_id;
+    }
+
+    /**
+     * @return the Obser
+     */
+    public String getObser() {
+        return Obser;
+    }
+
+    /**
+     * @param Obser the Obser to set
+     */
+    public void setObser(String Obser) {
+        this.Obser = Obser;
+    }
+
+    /**
+     * @return the valor_unit
+     */
+    public double getValor_unit() {
+        return valor_unit;
+    }
+
+    /**
+     * @param valor_unit the valor_unit to set
+     */
+    public void setValor_unit(double valor_unit) {
+        this.valor_unit = valor_unit;
     }
     
     
