@@ -15,28 +15,49 @@ import javax.swing.table.DefaultTableModel;
  */
 public class ViewOSAberta extends javax.swing.JFrame {
 
+    //static Thread T = new Thread();
+
     /**
      * Creates new form ViewOSAberta
      */
     public ViewOSAberta() {
         initComponents();
+
         ReadTable();
+       
+
     }
-    public void ReadTable(){
+
+    /*public int Contador() {
+        for (int c = 20; c >= 0; c--) {
+            try {
+                T.sleep(1000);
+                ReadTable();
+
+            } catch (InterruptedException ex) {
+                JOptionPane.showMessageDialog(null, "erro no contador");
+            }
+            System.out.println(c);
+
+        }
+        
+        return Contador();
+    }*/
+
+    public void ReadTable() {
         DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
         NovaOSDao OsAberta = new NovaOSDao();
         modelo.setNumRows(0);
-         for (SolicitacaoOSBeans sol : OsAberta.ReadTable()) {
-             modelo.addRow(new Object[]{
-                 sol.getId_solicitacao(),
-                 sol.getUser_id(),
-                 sol.getDep_id(),
-                 sol.getInfo_cab(),
-                 sol.getInfo_sol(),
-                 sol.getData_sol(),
-                 sol.getUrg_id(),
-                 sol.getSts_id(),
-             });
+        for (SolicitacaoOSBeans sol : OsAberta.ReadTable()) {
+            modelo.addRow(new Object[]{
+                sol.getId_solicitacao(),
+                sol.getUser_id(),
+                sol.getDep_id(),
+                sol.getInfo_cab(),
+                sol.getInfo_sol(),
+                sol.getData_sol(),
+                sol.getUrg_id(),
+                sol.getSts_id(),});
         }
     }
 
@@ -54,6 +75,7 @@ public class ViewOSAberta extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
+        setTitle("Ordem Serviços em Aberto");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -73,7 +95,7 @@ public class ViewOSAberta extends javax.swing.JFrame {
         });
         jScrollPane1.setViewportView(jTable1);
 
-        jButton1.setText("Atualizar Tablela");
+        jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/ata(1).jpg"))); // NOI18N
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
@@ -87,27 +109,28 @@ public class ViewOSAberta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 891, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jButton1)
-                        .addGap(0, 752, Short.MAX_VALUE))
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 868, Short.MAX_VALUE))
+                        .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                .addContainerGap(14, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap()
+                .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jButton1)
-                .addContainerGap())
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 291, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        pack();
+        setSize(new java.awt.Dimension(925, 374));
+        setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-    ReadTable();        // TODO add your handling code here:
+        ReadTable();
     }//GEN-LAST:event_jButton1ActionPerformed
 
     /**

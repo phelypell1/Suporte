@@ -56,4 +56,11 @@ public class TecnicosBeans {
     public void setAtivo(boolean ativo) {
         this.ativo = ativo;
     }
+
+    @Override
+    public String toString() {
+        return getNome_tec();
+    }
+    
+    
 }

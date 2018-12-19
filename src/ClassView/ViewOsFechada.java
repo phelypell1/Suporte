@@ -5,6 +5,11 @@
  */
 package ClassView;
 
+import ClassBeans.SolicitacaoOSBeans;
+import ClassDao.NovaOSDao;
+import ClassDao.OsFechadasDao;
+import javax.swing.table.DefaultTableModel;
+
 /**
  *
  * @author devops
@@ -13,10 +18,49 @@ public class ViewOsFechada extends javax.swing.JFrame {
 
     /**
      * Creates new form ViewOsFechada
-     */
+     */public void ReadTable() {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        OsFechadasDao OsAberta = new OsFechadasDao();
+        modelo.setNumRows(0);
+        for (SolicitacaoOSBeans sol : OsAberta.ReadTable()) {
+            modelo.addRow(new Object[]{
+                sol.getId_solicitacao(),
+                sol.getUser_id(),
+                sol.getDep_id(),
+                sol.getInfo_cab(),
+                sol.getInfo_sol(),
+                sol.getData_sol(),
+                sol.getUrg_id(),
+                sol.getSts_id(),
+                sol.getTec_id(),
+                sol.getInf_atendimento()
+            });
+        }
+    }
+     
+     public void ReadBusca(String busca) {
+        DefaultTableModel modelo = (DefaultTableModel) jTable1.getModel();
+        OsFechadasDao OsAberta = new OsFechadasDao();
+        modelo.setNumRows(0);
+        for (SolicitacaoOSBeans sol : OsAberta.Busca(busca)) {
+            modelo.addRow(new Object[]{
+                sol.getId_solicitacao(),
+                sol.getUser_id(),
+                sol.getDep_id(),
+                sol.getInfo_cab(),
+                sol.getInfo_sol(),
+                sol.getData_sol(),
+                sol.getUrg_id(),
+                sol.getSts_id(),
+                sol.getTec_id(),
+            });
+        }
+    }
     public ViewOsFechada() {
         initComponents();
+        ReadTable();
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -39,17 +83,22 @@ public class ViewOsFechada extends javax.swing.JFrame {
 
         jButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/Imagens/V1_5-Icone-Loupe(1).png"))); // NOI18N
         jButton1.setToolTipText("");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Código OS", "Solicitante", "Departamento", "Assunto", "Escopo", "Data Solicitação", "Urgencia", "Status", "Responsável atendimento", "Informação"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false
+                false, false, false, false, true, true, true, true, true, true
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -65,7 +114,7 @@ public class ViewOsFechada extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 839, Short.MAX_VALUE)
+                    .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 1005, Short.MAX_VALUE)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel1)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -81,16 +130,22 @@ public class ViewOsFechada extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel1)
-                    .addComponent(jTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextBusca, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 275, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        setSize(new java.awt.Dimension(873, 360));
+        setSize(new java.awt.Dimension(1039, 360));
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+      
+        ReadBusca(jTextBusca.getText());
+        
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -5,13 +5,22 @@
  */
 package ClassView;
 
+import ClassDao.ValidaAcessoDAL;
 import ConnectionClass.ConnectionFactor;
 import java.awt.Color;
+import java.awt.Container;
+import java.awt.FlowLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
+import javax.swing.JPasswordField;
+import javax.swing.JTextField;
 
 /**
  *
@@ -19,7 +28,14 @@ import javax.swing.JOptionPane;
  */
 public class ViewLogin extends javax.swing.JFrame {
 
+    static String getUsuario() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
     public String Acesso;
+    private String logado;
+    private JTextField cbUser;
+    private JTextField jtsenha;
 
     /**
      * 
@@ -28,10 +44,9 @@ public class ViewLogin extends javax.swing.JFrame {
 
         getContentPane().setBackground(Color.LIGHT_GRAY);
         initComponents();
-
     }
 
-    public boolean consultar(String login, String senha) {
+    /*public boolean consultar(String login, String senha) {
         boolean autenticado = false;
         String sql;
         try {
@@ -57,7 +72,8 @@ public class ViewLogin extends javax.swing.JFrame {
             JOptionPane.showMessageDialog(this, ex);
         }
         return autenticado;
-    }
+    }/*
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -159,20 +175,31 @@ public class ViewLogin extends javax.swing.JFrame {
     }//GEN-LAST:event_btnNovoUserActionPerformed
 
     private void btnAcessarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAcessarActionPerformed
-        boolean resposta = consultar(cbUsuario.getText(), jtSenha.getText());
+        ViewOSAberta osAberta = new ViewOSAberta();
+        ViewOsFechada osFechada = new ViewOsFechada();
+        ViewPrincipal principal = new ViewPrincipal();
+        ValidaAcessoDAL consulta = new ValidaAcessoDAL();
+        
+        boolean resposta = consulta.consultar(cbUsuario.getText(), jtSenha.getText());
         if(resposta == true) {
-            if ("Gerencia".equals(Acesso) || "Supervisao".equals(Acesso) || "Rh".equals(Acesso)) 
-            {
-                System.setProperty("Usuario: ",cbUsuario.getText());
-                this.setVisible(false);
-                ViewPrincipal princi = new ViewPrincipal();
-                princi.setVisible(true);
-            }
-            else if("Leitura".equals(Acesso) || "Corte".equals(Acesso) || "CPD".equals(Acesso))
+            if ("Gerencia".equals(consulta.Acesso) || "Supervisao".equals(consulta.Acesso) || "Rh".equals(consulta.Acesso)) 
             {
                 this.setVisible(false);
+                System.setProperty("login",cbUsuario.getText());
                 ViewPrincipal princ = new ViewPrincipal();
                 princ.setVisible(true);
+                
+                //System.getProperties("login","");
+            }
+            else if("Leitura".equals(consulta.Acesso) || "Corte".equals(consulta.Acesso) || "CPD".equals(consulta.Acesso))
+            {
+                this.setVisible(false);
+                System.setProperty("login",cbUsuario.getText());
+                ViewPrincipal princ = new ViewPrincipal();
+                princ.setVisible(true);
+                principal.setEnabled(true);
+                osAberta.setEnabled(false);
+                osFechada.setEnabled(false);
             }
         } else {
             JOptionPane.showMessageDialog(rootPane, "Usuário ou senha incorretos ! \n Ou entre em contato com área de TI para solicitar acesso!");
@@ -225,4 +252,18 @@ public class ViewLogin extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel2;
     private javax.swing.JPasswordField jtSenha;
     // End of variables declaration//GEN-END:variables
+
+    /**
+     * @return the logado
+     */
+    public String getLogado() {
+        return logado;
+    }
+
+    /**
+     * @param logado the logado to set
+     */
+    public void setLogado(String logado) {
+        this.logado = logado;
+    }
 }

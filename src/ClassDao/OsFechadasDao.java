@@ -8,6 +8,7 @@ package ClassDao;
 import ClassBeans.DepartamentoBeans;
 import ClassBeans.SolicitacaoOSBeans;
 import ClassBeans.StatusBeans;
+import ClassBeans.TecnicosBeans;
 import ClassBeans.TipoUrgenciaBeans;
 import ClassBeans.UsuariosBeans;
 import ConnectionClass.ConnectionFactor;
@@ -18,37 +19,12 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.swing.JOptionPane;
+
 /**
  *
  * @author devops
  */
-public class NovaOSDao {
-    public int Os;
-    public void Cadastrar(SolicitacaoOSBeans os){
-        Connection conn = ConnectionFactor.getConnection();
-        PreparedStatement stmt = null;
-        String sql;
-        try {
-            
-            sql = "insert into solicitacaoOS (user_id, dep_id, inf_cab, inf_sol, data_sol, tipourg_id,sts_id) values (?,?,?,?,?,?,Default)";
-                stmt = conn.prepareStatement(sql);
-                stmt.setInt(1, os.getUser_id().getId_user());
-                stmt.setInt(2, os.getDep_id().getId_dep());
-                stmt.setString(3, os.getInfo_cab());
-                stmt.setString(4, os.getInfo_sol());
-                stmt.setString(5, os.getData_sol());
-                stmt.setInt(6, os.getUrg_id().getId_urgencia());
-                //stmt.setInt(7, os.getSts_id().getId_sts());
-                stmt.executeUpdate();
-            
-            JOptionPane.showMessageDialog(null, "Solicitação realizada com sucesso !");
-            //JOptionPane.showMessageDialog(null,"Anote seu número de OS: "+ConsultaNumOS(Os));
-        } catch (SQLException ex) {
-            JOptionPane.showMessageDialog(null, "Erro ao gravar solicitação ! Erro no tratamento Cadastrar da classe NovaOS\n"+ex.getMessage());
-        }
-    }
-    
-    
+public class OsFechadasDao {
     
     public List<SolicitacaoOSBeans> ReadTable(){
         Connection conn = ConnectionFactor.getConnection();
@@ -56,21 +32,22 @@ public class NovaOSDao {
         ResultSet rs = null;
         String sql;
         List<SolicitacaoOSBeans> readlist = new ArrayList<>();
-        String  nome = "A";
+        
         
         try {
-            sql = "select id_OS, nome_user, nome_dep, inf_cab,inf_sol,data_sol, nome_urg, nome_status from solicitacaoOS "
-                + "inner join Usuario on id_user = user_id "
-                + "inner join Departamento on id_dep = dep_id "
-                + "inner join TipoUrgencia on id_urgencia = tipourg_id "
-                + "inner join status on id_status = sts_id where nome_status like '%r%'"
-                    + "order by data_sol";
-                //+ "where nome_status like A";
-               
+            sql ="select id_OS, nome_user, nome_dep, inf_cab, inf_sol, data_sol, nome_urg, nome_status, nome_tec, inf_atendimento"
+                    + " from solicitacaoOS"
+                    + " inner join Usuario on id_user = user_id "
+                    + "inner join Departamento on id_dep = dep_id "
+                    + "inner join TipoUrgencia on id_urgencia = tipourg_id "
+                    + "inner join status on id_status = sts_id "
+                    + "inner join Tecnicos on id_tec = tec_id";
+                
             pst = conn.prepareStatement(sql);
             rs = pst.executeQuery();
             while(rs.next()){
                 SolicitacaoOSBeans table = new SolicitacaoOSBeans();
+                
                 table.setId_solicitacao(rs.getInt("id_OS"));
                //Irá trazer o nome do usuário implementando o foreign key//
                 UsuariosBeans user =  new UsuariosBeans();
@@ -94,6 +71,11 @@ public class NovaOSDao {
                 status.setNome_sts(rs.getString("nome_status"));
                 table.setSts_id(status);
                 
+                TecnicosBeans tec = new TecnicosBeans();
+                tec.setNome_tec(rs.getString("nome_tec"));
+                table.setTec_id(tec);
+                
+                table.setInf_atendimento(rs.getString("inf_atendimento"));
                 //JOptionPane.showMessageDialog(null, sts);
                 readlist.add(table);
                 
@@ -103,7 +85,7 @@ public class NovaOSDao {
         }
         return readlist;
     }
-    public List<SolicitacaoOSBeans> ReadTableOs(String num){
+    public List<SolicitacaoOSBeans> Busca(String num){
         Connection conn = ConnectionFactor.getConnection();
         PreparedStatement pst = null;
         ResultSet rs = null;
@@ -113,14 +95,16 @@ public class NovaOSDao {
         
         
         try {
-            sql = "select id_OS, nome_user, nome_dep, inf_cab,inf_sol,data_sol, nome_urg, nome_status from solicitacaoOS "
+            sql = "select id_OS, nome_user, nome_dep, inf_cab,inf_sol,data_sol, nome_urg, nome_status, nome_tec from solicitacaoOS"
+                + "where id_OS like ?"
                 + "inner join Usuario on id_user = user_id "
                 + "inner join Departamento on id_dep = dep_id "
                 + "inner join TipoUrgencia on id_urgencia = tipourg_id "
                 + "inner join status on id_status = sts_id"
-                    + "where id_OS like ?";
+                + "inner join Tecnicos on id_tec = tec_id"
+                + "where id_OS like ?";
             pst = conn.prepareStatement(sql);
-            pst.setString(1, "%"+num+"%");
+            pst.setString(1, num);
             rs = pst.executeQuery();
             
             while(rs.next()){
@@ -149,6 +133,10 @@ public class NovaOSDao {
                 status.setNome_sts(rs.getString("nome_status"));
                 table.setSts_id(status);
                 
+                TecnicosBeans tec = new TecnicosBeans();
+                tec.setNome_tec(rs.getString("nome_tec"));
+                table.setTec_id(tec);
+                
                 //JOptionPane.showMessageDialog(null, sts);
                 readlist.add(table);
                 
@@ -158,5 +146,4 @@ public class NovaOSDao {
         }
         return readlist;
     }
-    
 }

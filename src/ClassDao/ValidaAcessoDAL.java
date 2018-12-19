@@ -9,35 +9,36 @@ import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import ClassView.ViewLogin;
+import javax.swing.JOptionPane;
 
 public class ValidaAcessoDAL {
+    public String Acesso;
     
-    
-    public boolean ValidaAcesso(String usuario, String senha){
-        Connection conn = ConnectionFactor.getConnection();
-        PreparedStatement stmt = null;
-        ResultSet rs = null;
+    public boolean consultar(String login, String senha) {
         boolean autenticado = false;
-        
+        String sql;
         try {
-            stmt = conn.prepareStatement("select nome_user, senha from Usuario where nome_user = ? and senha = ?");
-            stmt.setString(1, usuario);
-            stmt.setString(2, senha);
-            rs = stmt.executeQuery();
-            if(rs.next()){
-             String  user = rs.getString("nome_user");
-             String pass = rs.getString("senha");
-             //Acesso = rs.getString("Acesso");
-              
-            }
-            else{
-                stmt.close();
+            Connection conn = ConnectionFactor.getConnection();
+            sql = "SELECT nome_user, senha, setor FROM Usuario WHERE nome_user=? and senha=?";
+            PreparedStatement ps;
+            ps = conn.prepareStatement(sql);
+            ps.setString(1, login);
+            ps.setString(2, senha);
+            ResultSet rs;
+            rs = ps.executeQuery();
+            if (rs.next()) {
+                String user = rs.getString("nome_user");
+                String pass = rs.getString("senha");
+                Acesso = rs.getString("setor");//Aqui armazeno o tipo de acesso ("Administrador" ou "Outros") na variável publica Acesso declarada no inicio do código
+                autenticado = true;
+            } else {
+                //JOptionPane.showMessageDialog(this, "Acesso Negado \nInforme o setor de Inventário");
+                ps.close();
                 return autenticado;
             }
-            
         } catch (SQLException ex) {
-            Logger.getLogger(ValidaAcessoDAL.class.getName()).log(Level.SEVERE, null, ex);
+            JOptionPane.showMessageDialog(null, ex.getMessage());
         }
-          return autenticado;  
+        return autenticado;
     }
 }

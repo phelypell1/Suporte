@@ -5,7 +5,6 @@
  */
 package ClassBeans;
 
-import java.sql.Timestamp;
 
 /**
  *
@@ -20,6 +19,9 @@ public class SolicitacaoOSBeans {
     private TipoUrgenciaBeans urg_id;
     private String data_sol;
     private StatusBeans sts_id;
+    private String busca;
+    private TecnicosBeans tec_id;
+    private String inf_atendimento;
 
     /**
      * @return the id_solicitacao
@@ -131,6 +133,52 @@ public class SolicitacaoOSBeans {
      */
     public void setSts_id(StatusBeans sts_id) {
         this.sts_id = sts_id;
+    }
+
+    /**
+     * @return the busca
+     */
+    public String getBusca() {
+        return busca;
+    }
+
+    /**
+     * @param busca the busca to set
+     */
+    public void setBusca (String busca) {
+        this.busca = busca;
+    }
+
+    public void getBusca(String text) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    /**
+     * @return the tec_id
+     */
+    public TecnicosBeans getTec_id() {
+        return tec_id;
+    }
+
+    /**
+     * @param tec_id the tec_id to set
+     */
+    public void setTec_id(TecnicosBeans tec_id) {
+        this.tec_id = tec_id;
+    }
+
+    /**
+     * @return the inf_atendimento
+     */
+    public String getInf_atendimento() {
+        return inf_atendimento;
+    }
+
+    /**
+     * @param inf_atendimento the inf_atendimento to set
+     */
+    public void setInf_atendimento(String inf_atendimento) {
+        this.inf_atendimento = inf_atendimento;
     }
 
 }
