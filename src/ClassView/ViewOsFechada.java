@@ -6,7 +6,6 @@
 package ClassView;
 
 import ClassBeans.SolicitacaoOSBeans;
-import ClassDao.NovaOSDao;
 import ClassDao.OsFechadasDao;
 import javax.swing.table.DefaultTableModel;
 

@@ -44,4 +44,27 @@ public class CidadeColetorDao {
         }
         return cidadeColetor;
     }
+    
+    public List<CidadeColetorBeans> ListaCidade() {
+        Connection con = ConnectionFactor.getConnection();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        List<CidadeColetorBeans> cidadeColetor = new ArrayList<>();
+
+        try {
+            pst = con.prepareStatement("select * from Cidades");
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                CidadeColetorBeans cid = new CidadeColetorBeans();
+                cid.setId_Cid(rs.getInt("id_Cid"));
+                cid.setNome_cid(rs.getString("nome_cid"));
+                cidadeColetor.add(cid);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Carregar dados para o jcombox 'table.Cidades'");
+        }
+        return cidadeColetor;
+    }
 }

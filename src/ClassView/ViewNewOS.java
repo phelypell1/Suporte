@@ -7,7 +7,6 @@ package ClassView;
 
 import ClassBeans.DepartamentoBeans;
 import ClassBeans.SolicitacaoOSBeans;
-import ClassBeans.StatusBeans;
 import ClassBeans.TipoUrgenciaBeans;
 import ClassBeans.UsuariosBeans;
 import ClassDao.DepartamentoDAO;
@@ -15,6 +14,13 @@ import ClassDao.NovaOSDao;
 import ClassDao.PropriedadeDao;
 import ClassDao.StatusDao;
 import ClassDao.UsuariosDao;
+import ConnectionClass.ConnectionFactor;
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 
 /**
@@ -45,13 +51,8 @@ public class ViewNewOS extends javax.swing.JFrame {
             jComboUrgencia.setSelectedItem(null);
             jComboUrgencia.addItem(urgencia);
         }
-        
-        /*for(StatusBeans sta : sts.StatusRead()){
-            jComboB.addItem(sta);
-        }*/
-    ///////////////////////////////////////////////////////////////////
     }
-
+  
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -209,7 +210,17 @@ public class ViewNewOS extends javax.swing.JFrame {
         sol.setData_sol(jDateSolicitacao.getDateEditor().getUiComponent().getName());
         sol.setUrg_id((TipoUrgenciaBeans) jComboUrgencia.getSelectedItem());
         nov.Cadastrar(sol);
+        
+        jComboSolicitante.setSelectedItem(null);
+        jComboDepartamento.setSelectedItem(null);
+        jTextAssunto.setText("");
+        jtextEscopo.setText("");
+        jDateSolicitacao.setDate(null);
+        jComboUrgencia.setSelectedItem(null);
+        
         }
+        
+      
     }//GEN-LAST:event_btnEnviarActionPerformed
 
     /**

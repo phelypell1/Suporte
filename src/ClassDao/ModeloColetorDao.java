@@ -33,8 +33,8 @@ public class ModeloColetorDao {
 
             while (rs.next()) {
                 ModeloColetorBeans user = new ModeloColetorBeans();
-                user.setId_modelo(rs.getInt("id_modelo"));
-                user.setMmc_modelo(rs.getString("nome_modelo"));
+                user.setId_modelo(rs.getInt("id_mmc"));
+                user.setMmc_modelo(rs.getString("nome_mmc"));
                 modeloColetor.add(user);
             }
         } catch (Exception e) {

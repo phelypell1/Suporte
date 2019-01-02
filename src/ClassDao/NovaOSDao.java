@@ -15,19 +15,27 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.accessibility.AccessibleRole;
 import javax.swing.JOptionPane;
 /**
  *
  * @author devops
  */
 public class NovaOSDao {
-    public int Os;
+    SolicitacaoOSBeans jbl = new SolicitacaoOSBeans();
+    ConsultaIdDao ids = new ConsultaIdDao();
     public void Cadastrar(SolicitacaoOSBeans os){
         Connection conn = ConnectionFactor.getConnection();
         PreparedStatement stmt = null;
         String sql;
+        int id = 0;
+        Statement statement = null;
+        
         try {
             
             sql = "insert into solicitacaoOS (user_id, dep_id, inf_cab, inf_sol, data_sol, tipourg_id,sts_id) values (?,?,?,?,?,?,Default)";
@@ -40,15 +48,24 @@ public class NovaOSDao {
                 stmt.setInt(6, os.getUrg_id().getId_urgencia());
                 //stmt.setInt(7, os.getSts_id().getId_sts());
                 stmt.executeUpdate();
+                statement = (Statement) conn.createStatement();
+               
+                if(id == 0){
+                    ResultSet res = statement.executeQuery("select max(id_OS) from solicitacaoOS");
+                    if(res.next()){
+                    id = res.getInt(1);
+                    }
+                }
+                JOptionPane.showMessageDialog(null,"Solicitação cadastrada com sucesso ! \n"
+                        + "Anote sua Ordem de serviço: "+id);
             
-            JOptionPane.showMessageDialog(null, "Solicitação realizada com sucesso !");
-            //JOptionPane.showMessageDialog(null,"Anote seu número de OS: "+ConsultaNumOS(Os));
+            
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Erro ao gravar solicitação ! Erro no tratamento Cadastrar da classe NovaOS\n"+ex.getMessage());
         }
     }
     
-    
+   
     
     public List<SolicitacaoOSBeans> ReadTable(){
         Connection conn = ConnectionFactor.getConnection();

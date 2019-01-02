@@ -181,4 +181,7 @@ public class SolicitacaoOSBeans {
         this.inf_atendimento = inf_atendimento;
     }
 
+    public int getId_solicitacao(int aInt) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
 }

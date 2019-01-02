@@ -42,6 +42,29 @@ public class RegiaoColetorDao {
             JOptionPane.showMessageDialog(null, "Erro ao Carregar dados para o jcombox 'table.Cidades'");
         }
         return regiaoColetor;
-    }  
+    }
+      
+      public List<RegiaoColetorBeans> ListaRegiao() {
+        Connection con = ConnectionFactor.getConnection();
+        PreparedStatement pst = null;
+        ResultSet rs = null;
+
+        List<RegiaoColetorBeans> regiaoColetor = new ArrayList<>();
+
+        try {
+            pst = con.prepareStatement("select * from Regiao");
+            rs = pst.executeQuery();
+
+            while (rs.next()) {
+                RegiaoColetorBeans user = new RegiaoColetorBeans();
+                user.setId_reg(rs.getInt("id_reg"));
+                user.setNome_reg(rs.getString("nome_reg"));
+                regiaoColetor.add(user);
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Erro ao Carregar dados para o jcombox 'table.Cidades'");
+        }
+        return regiaoColetor;
+    } 
 
 }

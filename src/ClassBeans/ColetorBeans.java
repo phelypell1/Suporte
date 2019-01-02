@@ -11,6 +11,7 @@ public class ColetorBeans {
     private String so_col;
     private String data_compra;
     private String data_sucata;
+    private String data_emprestimo;
     private UsuariosBeans user_id;
     private String data_ultEdicao;
     private String Observacao;
@@ -241,5 +242,23 @@ public class ColetorBeans {
      */
     public void setDep_col(DepartamentoColetorBeans dep_col) {
         this.dep_col = dep_col;
+    }
+
+    /**
+     * @return the data_emprestimo
+     */
+    public String getData_emprestimo() {
+        return data_emprestimo;
+    }
+
+    /**
+     * @param data_emprestimo the data_emprestimo to set
+     */
+    public void setData_emprestimo(String data_emprestimo) {
+        this.data_emprestimo = data_emprestimo;
+    }
+
+    public void setReg_col(DepartamentoColetorBeans dep) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
